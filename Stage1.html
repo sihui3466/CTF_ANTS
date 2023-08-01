@@ -7,11 +7,9 @@
 <title>CTF ANTS Challenge </title>
 <script>
     function goToStage2() {
-        // Change "another-page.html" to the URL of the page you want to navigate to
         window.location.href = "Stage2.html";
     }
     function goToHome() {
-        // Change "another-page.html" to the URL of the page you want to navigate to
         window.location.href = "CTF_ANT.html";
     }
     var inputValid=false
@@ -23,10 +21,10 @@
 
         if (inputValue === expectedValue) {
             alert("Congrats you got it! Lets go to stage 2");
-            inputValid = true; // Set the validation result to true
+            inputValid = true; 
         } else {
             alert("Invalid input. Try again.");
-            inputValid = false; // Set the validation result to false
+            inputValid = false; 
             
         }
     }
@@ -35,7 +33,6 @@
         checkInput();
         if (inputValid){
             goToStage2();
-            alert("Yay you got it!");
         }
         else{
             alert("Wrong answer! Try again!")
