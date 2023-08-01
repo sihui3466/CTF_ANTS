@@ -14,6 +14,28 @@
         // Change "another-page.html" to the URL of the page you want to navigate to
         window.location.href = "CTF_ANT.html";
     }
+
+    window.onload = function() {
+        var textToPrint = "11101011111101011"; 
+        var container = document.getElementById('container');
+        var index = 0;
+
+        function printCharacter() {
+            if (index < textToPrint.length) {
+                // Delay for each bit
+                var delay = textToPrint[index] === "0" ? 500 : 1500; 
+                container.innerHTML += textToPrint[index];
+                index++;
+                setTimeout(printCharacter, delay);
+            }else { 
+                index = 0;
+                container.innerHTML = ''; 
+                setTimeout(printCharacter, 2000); // restart after 2 seconds
+            }
+        }
+
+        printCharacter();
+    }
     var inputValid=false
     function checkInput() {
         var expectedValue = "ynxlzbpdvehef"; 
@@ -22,12 +44,10 @@
         console.log("Input value: ", inputValue); 
 
         if (inputValue === expectedValue) {
-            alert("Congrats you got it! Lets go to stage 2");
+            alert("Congrats you got it! Lets go to stage 3");
             inputValid = true; // Set the validation result to true
         } else {
-            alert("Invalid input. Try again.");
             inputValid = false; // Set the validation result to false
-            
         }
     }
 
@@ -35,7 +55,6 @@
         checkInput();
         if (inputValid){
             goToStage2();
-            alert("Yay you got it!");
         }
         else{
             alert("Wrong answer! Try again!")
@@ -52,9 +71,7 @@
 <p>All teams will have to play as different ant colonies on a mission to retrieve treasured treats from the top tier of the cake plate as tasked by the queen ant. Each step of the journey up the cake plate is part of the challenge, once the contents of the file 
 of the top tier (stage 3) has been revealed, the ant colonies will reach their goal of retrieving the treats for their queen.</p>
 
-<h5>WRITINGSONTHEWALL</h5>
-<p>al84ndi5h8qmn4a8ohfi6e874hnm4hnm4hnmlm4jo5fc6e8shwyx2y2w1v133yuvvux31jo5fc6e8s4hnm4hnm4
-hnmhinbchanim88b8l8fiie8fm8qb8l8h4hnm4hnm4hnmmn4lni948me8sni58786i7875slm4shrft5j7p8b898h74hnm4hnm4hnm</p>
+<div id="container" style="text-align: center;"></div>
 <form>
     <div class="form-group">
       <label for="exampleFormControlInput1">Decrypted Text</label>
