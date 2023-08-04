@@ -7,20 +7,7 @@
 <title>CTF ANTS Challenge </title>
 <script>
     var inputValid=false
-    function checkInput() {
-        var expectedValue = "greatjobnewstageunlockedantsantsantsrsapublickeyn24384827179940110397publickeyantsantsantsstartofaeskeytobedecodedbyrsaynxlzbpdvehefend";
-        var inputElement = document.getElementById("exampleFormControlInput1");
-        var inputValue = inputElement.value;
-        console.log("Input value: ", inputValue);
 
-        if (inputValue === expectedValue) {
-            alert("Congrats you got it! Lets go to stage 2");
-            localStorage.setItem("Stage1", "true");
-            inputValid = true;
-        } else {
-            inputValid = false;
-        }
-    }
 
     function goToStage(stage) {
         // Check if the previous stage is completed
@@ -37,15 +24,28 @@
         console.log("Previous stage status: ", prevStageStatus);
         return prevStageStatus === "true";
     }
-
-    function handleButtonClick(){
-        checkInput();
-        if (inputValid){
-            goToStage('Stage2');
-        }
-        else{
-            alert("Wrong answer! Try again!")
-        }
+    async function hashInput(input) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+    async function handleButtonClick(){ 
+        var expectedValue = "e488fa490cc0a774e5d5dcfff676a60527aa630a4e610ebb76001d8cae22847f";  
+        var inputElement = document.getElementById("exampleFormControlInput1"); 
+        var inputValue = inputElement.value; 
+        console.log("Input value: ", inputValue); 
+        var hash = await hashInput(inputValue); 
+        console.log("Hash value: ", hash); 
+        if (hash === expectedValue) { 
+            alert("Congrats you got it! Let's go to stage 2"); 
+            localStorage.setItem("Stage1", "true"); 
+            goToStage('Stage2'); 
+        } else { 
+            alert("Wrong answer! Try again!"); 
+        } 
     }
 
 </script>
@@ -74,7 +74,7 @@
     The key's in the spin, the shift of the age, decrypt the message, and turn the next page.</p>
 
 <h5>WRITINGSONTHEWALL</h5>
-<p>al84ndi5h8qmn4a8ohfi6e874hnm4hnm4hnmlm4jo5fc6e8shwyx2y2w1v133yuvvux31jo5fc6e8s4hnm4hnm4hnmmn4lni948me8sni58786i7875slm4shrft5j7p8b898h7</p>
+<p>al84ndi5h8qmn4a8ohfi6e874hnm4hnm4hnmlm4jo5fc6e8shwyx2y2w1v133yuvvux31jo5fc6e8s4hnm4hnm4hnmmn4lni948me8sni58786i7875slm4vuw30xuyx310xxuz01u08h7</p>
 <form>
     <div class="form-group">
         <label for="exampleFormControlInput1">Decrypted Text</label>

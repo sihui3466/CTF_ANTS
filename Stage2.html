@@ -54,30 +54,28 @@
     }
 
     var inputValid = false;
-    function checkInput() {
-        var expectedValue = "10000000000000001"; 
-        var inputElement = document.getElementById("exampleFormControlInput1");
-        var inputValue = inputElement.value;
-        console.log("Input value: ", inputValue); 
-
-        if (inputValue === expectedValue) {
-            alert("Congrats you got it! Let's go to Stage 2b");
-            inputValid = true; // Set the validation result to true
-            localStorage.setItem("Stage2", "true");
-
-        } else {
-            inputValid = false; // Set the validation result to false
-        }
+    async function hashInput(input) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+        return hashHex;
     }
-
-    function handleButtonClick(){
-        checkInput();
-        if (inputValid){
-            goToStage('Stage2b');
-        }
-        else{
-            alert("Wrong answer! Try again!")
-        }
+    async function handleButtonClick(){ 
+        var expectedValue = "86852d7e54f5f718146fc0941a7ddb658e6d7fbb5c68e897cef2c4e46df7e214";  
+        var inputElement = document.getElementById("exampleFormControlInput1"); 
+        var inputValue = inputElement.value; 
+        console.log("Input value: ", inputValue); 
+        var hash = await hashInput(inputValue); 
+        console.log("Hash value: ", hash); 
+        if (hash === expectedValue) { 
+            alert("Congrats you got it! Let's go to stage 2b"); 
+            localStorage.setItem("Stage2", "true"); 
+            goToStage('Stage2b'); 
+        } else { 
+            alert("Wrong answer! Try again!"); 
+        } 
     }
 </script>
 <style>

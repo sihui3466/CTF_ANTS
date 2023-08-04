@@ -29,29 +29,28 @@
     }
 
     var inputValid = false;
-    function checkInput() {
-        var expectedValue = "879218557499725217"; 
-        var inputElement = document.getElementById("exampleFormControlInput1");
-        var inputValue = inputElement.value;
-        console.log("Input value: ", inputValue); 
-
-        if (inputValue === expectedValue) {
-            alert("Congrats you got it! You found the flag");
-            inputValid = true; // Set the validation result to true
-            localStorage.setItem("Stage3", "true");
-        } else {
-            inputValid = false; // Set the validation result to false
-        }
+    async function hashInput(input) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+        return hashHex;
     }
-
-    function handleButtonClick(){
-        checkInput();
-        if (inputValid){
-            goToStage('flag');
-        }
-        else{
-            alert("Wrong answer! Try again!")
-        }
+    async function handleButtonClick(){ 
+        var expectedValue = "4efc1c69491f2654dd60c2c77153e44e1dc5826f703ea236238f739edb05135c";  
+        var inputElement = document.getElementById("exampleFormControlInput1"); 
+        var inputValue = inputElement.value; 
+        console.log("Input value: ", inputValue); 
+        var hash = await hashInput(inputValue); 
+        console.log("Hash value: ", hash); 
+        if (hash === expectedValue) { 
+            alert("Congrats you got it! You found the flag"); 
+            localStorage.setItem("Stage3", "true"); 
+            goToStage('flag'); 
+        } else { 
+            alert("Wrong answer! Try again!"); 
+        } 
     }
 </script>
 <style>
@@ -73,42 +72,10 @@
 
 <h1>CTF ANTS Challenge</h1>
 <p></p>
-<h3>Stage 2b: The queen loves rotten sweet apricots</h3>
+<h3>Stage 3: Almost there</h3>
 
-<form id="cipherForm">
-    <label for="a">Enter value to be decrypted:</label>
-    <input type="number" id="a" name="a" required>
-    <br>
-    <label for="x">Enter value for e:</label>
-    <input type="number" id="x" name="x" required>
-    <br>
-    <label for="n">Enter value for d:</label>
-    <input type="number" id="n" name="n" required>
-    <br>
-    <button type="button" onclick="calculateResult()">Calculate</button>
-</form>
-<div class="message" id="result"></div>
-<script>
-    function square_multiply(a, x, n) {
-        let y = 1;
-        let n_b = x.toString(2);
-        for (let i of n_b.split('').reverse()) {
-            if (i === '1') {
-                y = (y * a) % n;
-            }
-            a = (a * a) % n;
-        }
-        return y;
-    }
-
-    function calculateResult() {
-        const a = parseInt(document.getElementById('a').value);
-        const x = parseInt(document.getElementById('x').value);
-        const n = parseInt(document.getElementById('n').value);
-        const result = square_multiply(a, x, n);
-        document.getElementById('result').innerText = 'The result is: ' + result;
-    }
-</script>
+<p>Now use the values from stage1 and stage2b to decrypt the number found in at the end of stage1</p>
+<p>Hint: use square multiply</p>
 
 <form>
     <div class="form-group">

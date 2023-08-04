@@ -28,43 +28,31 @@
         return prevStageStatus === "true";
     }
 
-    async function hashInput(inputValue) {
+    async function hashInput(input) {
         const encoder = new TextEncoder();
-        const data = encoder.encode(inputValue);
+        const data = encoder.encode(input);
         const hashBuffer = await crypto.subtle.digest('SHA-256', data);
         const hashArray = Array.from(new Uint8Array(hashBuffer));
         const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
         return hashHex;
     }
-
-    var inputValid = false;
-    function checkInput() {
-        var expectedValue = "4e414a144877af530b496bd13463d176c9d9b48e15f0895a2a4090c3c25db24b"; 
-        var inputElement = document.getElementById("exampleFormControlInput1");
-        var inputValue = inputElement.value;
-        console.log("Input value: ", inputValue);
-
-            hashInput(inputValue).then(hash => {
-                if (hash === expectedValue) {
-                    console.log(hash);
-                    alert("Congrats you got it! Let's go to stage 3");
-                    localStorage.setItem("Stage2b", "true");
-                    inputValid = true; 
-                } else {
-                    inputValid = false; 
-                }
-                console.log(hash);
-            });
-    }
-
-    function handleButtonClick(){
-        checkInput();
-        if (inputValid){
-            goToStage('Stage3');
-        }
-        else{
-            alert("Wrong answer! Try again!")
-        }
+    
+    async function handleButtonClick(){ 
+        var expectedValue = "4e414a144877af530b496bd13463d176c9d9b48e15f0895a2a4090c3c25db24b";  
+        var inputElement = document.getElementById("exampleFormControlInput1"); 
+        var inputValue = inputElement.value; 
+        console.log("Input value: ", inputValue); 
+ 
+        var hash = await hashInput(inputValue); 
+        console.log("Hash value: ", hash); 
+ 
+        if (hash === expectedValue) { 
+            alert("Congrats you got it! Let's go to stage 3"); 
+            localStorage.setItem("Stage2b", "true"); 
+            goToStage('Stage3'); 
+        } else { 
+            alert("Wrong answer! Try again!"); 
+        } 
     }
 </script>
 <style>
