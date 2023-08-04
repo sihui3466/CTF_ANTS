@@ -6,9 +6,9 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    function goToStage2() {
+    function goToStage2b() {
         // Change "another-page.html" to the URL of the page you want to navigate to
-        window.location.href = "Stage2.html";
+        window.location.href = "Stage2b.html";
     }
     function goToHome() {
         // Change "another-page.html" to the URL of the page you want to navigate to
@@ -48,7 +48,7 @@
         console.log("Input value: ", inputValue); 
 
         if (inputValue === expectedValue) {
-            alert("Congrats you got it! Lets go to stage 2");
+            alert("Congrats you got it! Lets go to stage 2b");
             inputValid = true; // Set the validation result to true
         } else {
             inputValid = false; // Set the validation result to false
@@ -58,7 +58,7 @@
     function handleButtonClick(){
         checkInput();
         if (inputValid){
-            goToStage2();
+            goToStage2b();
         }
         else{
             alert("Wrong answer! Try again!")
@@ -102,7 +102,6 @@
 
 
 <button type="button" onclick="handleButtonClick()" class="btn btn-primary">Next</button>
-<button type="button" onclick="goToHome()" class="btn btn-light">Back</button>
 
 </body>
 </html>
