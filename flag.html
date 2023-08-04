@@ -8,7 +8,7 @@
         <title>FLAG </title>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                const currentStage = 'Flag'; // Replace 'X' with the stage number of this page
+                const currentStage = 'flag'; // Replace 'X' with the stage number of this page
                 if (!isPreviousStageCompleted(currentStage)) {
                     alert("You must complete the previous stage first.");
                     window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
@@ -24,7 +24,7 @@
                 }
 
                 function isPreviousStageCompleted(stage) {
-                    const previousStage = "Stage2b";
+                    const previousStage = "Stage3";
                     const prevStageStatus = localStorage.getItem(previousStage);
                     return prevStageStatus === "true";
                 }

@@ -6,7 +6,7 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    const currentStage = 'Stage2b'; // Replace 'X' with the stage number of this page
+    const currentStage = 'Stage3'; // Replace 'X' with the stage number of this page
     if (!isPreviousStageCompleted(currentStage)) {
         alert("You must complete the previous stage first.");
         window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
@@ -22,45 +22,32 @@
     }
 
     function isPreviousStageCompleted(stage) {
-        const previousStage = "Stage2";
+        const previousStage = "Stage2b";
         const prevStageStatus = localStorage.getItem(previousStage);
         console.log("Previous stage status: ", previousStage, prevStageStatus);
         return prevStageStatus === "true";
     }
 
-    async function hashInput(inputValue) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(inputValue);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-        return hashHex;
-    }
-
     var inputValid = false;
     function checkInput() {
-        var expectedValue = "4e414a144877af530b496bd13463d176c9d9b48e15f0895a2a4090c3c25db24b"; 
+        var expectedValue = "879218557499725217"; 
         var inputElement = document.getElementById("exampleFormControlInput1");
         var inputValue = inputElement.value;
-        console.log("Input value: ", inputValue);
+        console.log("Input value: ", inputValue); 
 
-            hashInput(inputValue).then(hash => {
-                if (hash === expectedValue) {
-                    console.log(hash);
-                    alert("Congrats you got it! Let's go to stage 3");
-                    localStorage.setItem("Stage2b", "true");
-                    inputValid = true; 
-                } else {
-                    inputValid = false; 
-                }
-                console.log(hash);
-            });
+        if (inputValue === expectedValue) {
+            alert("Congrats you got it! You found the flag");
+            inputValid = true; // Set the validation result to true
+            localStorage.setItem("Stage3", "true");
+        } else {
+            inputValid = false; // Set the validation result to false
+        }
     }
 
     function handleButtonClick(){
         checkInput();
         if (inputValid){
-            goToStage('Stage3');
+            goToStage('flag');
         }
         else{
             alert("Wrong answer! Try again!")
@@ -88,20 +75,40 @@
 <p></p>
 <h3>Stage 2b: The queen loves rotten sweet apricots</h3>
 
-<div class="message">
-    <p>In the bowl of Rotten Sweet Apricots,</p>
-    <p>A cryptic challenge awaits, a puzzle of secret thoughts.</p>
-    <p>A key lies open, a number vast and grand,</p>
-    <p>Two primes concealed, in a digital land.</p>
-    <p>Brute force is needed, a task for the bold,</p>
-    <p>Factor the key, let the mystery unfold.</p>
-    <p>With factors in hand, a new path you'll see,</p>
-    <p>A calculation awaits, to set the secret free.</p>
-    <p>The 'd' is the door, the private's embrace,</p>
-    <p>Unlock the puzzle, and win the cryptic race.</p>
-    <p>Time is your foe, the challenge is great,</p>
-    <p>Find the public, break the private, before it's too late.</p>
-</div>
+<form id="cipherForm">
+    <label for="a">Enter value to be decrypted:</label>
+    <input type="number" id="a" name="a" required>
+    <br>
+    <label for="x">Enter value for e:</label>
+    <input type="number" id="x" name="x" required>
+    <br>
+    <label for="n">Enter value for d:</label>
+    <input type="number" id="n" name="n" required>
+    <br>
+    <button type="button" onclick="calculateResult()">Calculate</button>
+</form>
+<div class="message" id="result"></div>
+<script>
+    function square_multiply(a, x, n) {
+        let y = 1;
+        let n_b = x.toString(2);
+        for (let i of n_b.split('').reverse()) {
+            if (i === '1') {
+                y = (y * a) % n;
+            }
+            a = (a * a) % n;
+        }
+        return y;
+    }
+
+    function calculateResult() {
+        const a = parseInt(document.getElementById('a').value);
+        const x = parseInt(document.getElementById('x').value);
+        const n = parseInt(document.getElementById('n').value);
+        const result = square_multiply(a, x, n);
+        document.getElementById('result').innerText = 'The result is: ' + result;
+    }
+</script>
 
 <form>
     <div class="form-group">
