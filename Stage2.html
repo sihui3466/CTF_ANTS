@@ -24,7 +24,7 @@
     function printCharacter() {
         if (index < textToPrint.length) {
             // Delay for each bit
-            var delay = codeForDelay[index] === "0" ? 500 : 1500; 
+            var delay = codeForDelay[index] === "0" ? 500 : 2000; 
             container.innerHTML += textToPrint[index];
             index++;
             setTimeout(printCharacter, delay);
@@ -32,7 +32,7 @@
             setTimeout(function() {
                 index = 0;
                 container.innerHTML = ''; 
-                setTimeout(printCharacter, 5000); // restart after 5 seconds
+                setTimeout(printCharacter, 2000); // restart after 2 seconds
             }, 5000); // Characters stay for 5 seconds
         }
         }
@@ -65,13 +65,26 @@
         }
     }
 </script>
-
+<style>
+    body {
+        font-family: 'Courier New', monospace;
+        background-color: #f4f4f4;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+    .message {
+        border: 2px solid #333;
+        padding: 20px;
+        margin: 20px;
+    }
+</style>
 </head>
 <body>
 
 <h1>CTF ANTS Challenge</h1>
 <p></p>
-<h3>Stage 2: The queen loves rotten sweet apricots</h3>
+<h3>Stage 2: Timing attack</h3>
 <div class="message">
     <p>In the realm where shadows dance,</p>
     <p>A hidden path, a fleeting glance.</p>
