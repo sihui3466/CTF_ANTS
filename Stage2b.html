@@ -6,14 +6,13 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    const currentStage = 'Stage2b'; // Replace 'X' with the stage number of this page
+    const currentStage = 'Stage2b'; 
     if (!isPreviousStageCompleted(currentStage)) {
         alert("You must complete the previous stage first.");
-        window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
+        window.location.href = "CTF_ANT.html"; 
     }
 
     function goToStage(stage) {
-        // Check if the previous stage is completed
         if (isPreviousStageCompleted(stage)) {
             window.location.href = stage + ".html";
         } else {
@@ -42,10 +41,8 @@
         var inputElement = document.getElementById("exampleFormControlInput1"); 
         var inputValue = inputElement.value; 
         console.log("Input value: ", inputValue); 
- 
         var hash = await hashInput(inputValue); 
         console.log("Hash value: ", hash); 
- 
         if (hash === expectedValue) { 
             alert("Congrats you got it! Let's go to stage 3"); 
             localStorage.setItem("Stage2b", "true"); 
