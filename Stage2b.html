@@ -6,7 +6,7 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    const currentStage = 'Stage3'; // Replace 'X' with the stage number of this page
+    const currentStage = 'Stage2b'; // Replace 'X' with the stage number of this page
     if (!isPreviousStageCompleted(currentStage)) {
         alert("You must complete the previous stage first.");
         window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
@@ -22,9 +22,9 @@
     }
 
     function isPreviousStageCompleted(stage) {
-        const previousStage = stage.substring(0, stage.length - 1) + (parseInt(stage.charAt(stage.length - 1)) - 1);
+        const previousStage = "Stage2";
         const prevStageStatus = localStorage.getItem(previousStage);
-        console.log("Previous stage status: ", prevStageStatus);
+        console.log("Previous stage status: ", previousStage, prevStageStatus);
         return prevStageStatus === "true";
     }
 
@@ -38,7 +38,7 @@
         if (inputValue === expectedValue) {
             alert("Congrats you got it! Let's go to Stage 2b");
             inputValid = true; // Set the validation result to true
-            localStorage.setItem("Stage2", "true");
+            localStorage.setItem("Stage2b", "true");
         } else {
             inputValid = false; // Set the validation result to false
         }

@@ -22,7 +22,7 @@
     }
 
     function isPreviousStageCompleted(stage) {
-        const previousStage = stage.substring(0, stage.length - 1) + (parseInt(stage.charAt(stage.length - 1)) - 1);
+        const previousStage = "Stage1";
         const prevStageStatus = localStorage.getItem(previousStage);
         console.log("Previous stage status: ", previousStage, prevStageStatus);
         return prevStageStatus === "true";
@@ -73,7 +73,7 @@
     function handleButtonClick(){
         checkInput();
         if (inputValid){
-            goToStage('Stage3');
+            goToStage('Stage2b');
         }
         else{
             alert("Wrong answer! Try again!")
