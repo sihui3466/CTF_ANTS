@@ -30,13 +30,13 @@
 
     var inputValid = false;
     function checkInput() {
-        var expectedValue = "10000000000000001"; 
+        var expectedValue = "879218557499725217"; 
         var inputElement = document.getElementById("exampleFormControlInput1");
         var inputValue = inputElement.value;
         console.log("Input value: ", inputValue); 
 
         if (inputValue === expectedValue) {
-            alert("Congrats you got it! Let's go to Stage 2b");
+            alert("Congrats you got it! Let's go to Stage 3");
             inputValid = true; // Set the validation result to true
             localStorage.setItem("Stage2b", "true");
         } else {
@@ -54,36 +54,46 @@
         }
     }
 </script>
-
+<style>
+    body {
+        font-family: 'Courier New', monospace;
+        background-color: #f4f4f4;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+    .message {
+        border: 2px solid #333;
+        padding: 20px;
+        margin: 20px;
+    }
+</style>
 </head>
 <body>
 
 <h1>CTF ANTS Challenge</h1>
 <p></p>
-<h3>Stage 2: The queen loves rotten sweet apricots</h3>
+<h3>Stage 2b: The queen loves rotten sweet apricots</h3>
+
 <div class="message">
-    <p>In the realm where shadows dance,</p>
-    <p>A hidden path, a fleeting glance.</p>
-    <p>Two keys await, one seen, one veiled,</p>
-    <p>A twisted trail, oft sought and failed.</p>
-    <p>The first lies open, a riddle's start,</p>
-    <p>A gateway's promise, a seeker's art.</p>
-    <p>The second's hidden, a fortress strong,</p>
-    <p>A secret whispered in cipher's song.</p>
-    <p>Forge the path with wisdom's might,</p>
-    <p>Through endless maze and digital night.</p>
-    <p>Time's a foe, and clues are few,</p>
-    <p>Crack the code, and truth pursue.</p>
-    <p>In numbers, patterns, lies the way,</p>
-    <p>A fleeting game, a puzzle's play.</p>
-    <p>Seek the keys, unlock the lore,</p>
-    <p>Find what's hidden behind the door.</p>
+    <p>In the bowl of Rotten Sweet Apricots,</p>
+    <p>A cryptic challenge awaits, a puzzle of secret thoughts.</p>
+    <p>A key lies open, a number vast and grand,</p>
+    <p>Two primes concealed, in a digital land.</p>
+    <p>Brute force is needed, a task for the bold,</p>
+    <p>Factor the key, let the mystery unfold.</p>
+    <p>With factors in hand, a new path you'll see,</p>
+    <p>A calculation awaits, to set the secret free.</p>
+    <p>The 'd' is the door, the private's embrace,</p>
+    <p>Unlock the puzzle, and win the cryptic race.</p>
+    <p>Time is your foe, the challenge is great,</p>
+    <p>Find the public, break the private, before it's too late.</p>
 </div>
 
 <form>
     <div class="form-group">
-      <label for="exampleFormControlInput1">Decrypted Text</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="abcd1234">
+        <label for="exampleFormControlInput1">Value:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="enter your number here">
     </div>
 </form>
 
