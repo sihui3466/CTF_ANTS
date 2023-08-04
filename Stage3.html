@@ -6,16 +6,29 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    function goToStage2b() {
-        // Change "another-page.html" to the URL of the page you want to navigate to
-        window.location.href = "Stage2b.html";
-    }
-    function goToHome() {
-        // Change "another-page.html" to the URL of the page you want to navigate to
-        window.location.href = "CTF_ANT.html";
+    const currentStage = 'Stage3'; // Replace 'X' with the stage number of this page
+    if (!isPreviousStageCompleted(currentStage)) {
+        alert("You must complete the previous stage first.");
+        window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
     }
 
-    var inputValid=false
+    function goToStage(stage) {
+        // Check if the previous stage is completed
+        if (isPreviousStageCompleted(stage)) {
+            window.location.href = stage + ".html";
+        } else {
+            alert("You must complete the previous stage first.");
+        }
+    }
+
+    function isPreviousStageCompleted(stage) {
+        const previousStage = stage.substring(0, stage.length - 1) + (parseInt(stage.charAt(stage.length - 1)) - 1);
+        const prevStageStatus = localStorage.getItem(previousStage);
+        console.log("Previous stage status: ", prevStageStatus);
+        return prevStageStatus === "true";
+    }
+
+    var inputValid = false;
     function checkInput() {
         var expectedValue = "10000000000000001"; 
         var inputElement = document.getElementById("exampleFormControlInput1");
@@ -23,8 +36,9 @@
         console.log("Input value: ", inputValue); 
 
         if (inputValue === expectedValue) {
-            alert("Congrats you got it! Lets go to stage 2b");
+            alert("Congrats you got it! Let's go to Stage 2b");
             inputValid = true; // Set the validation result to true
+            localStorage.setItem("Stage2", "true");
         } else {
             inputValid = false; // Set the validation result to false
         }
@@ -33,7 +47,7 @@
     function handleButtonClick(){
         checkInput();
         if (inputValid){
-            goToStage2b();
+            goToStage('flag');
         }
         else{
             alert("Wrong answer! Try again!")

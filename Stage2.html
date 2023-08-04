@@ -6,41 +6,54 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    function goToStage2b() {
-        // Change "another-page.html" to the URL of the page you want to navigate to
-        window.location.href = "Stage2b.html";
+    const currentStage = 'Stage2'; // Replace 'X' with the stage number of this page
+    if (!isPreviousStageCompleted(currentStage)) {
+        alert("You must complete the previous stage first.");
+        window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
     }
-    function goToHome() {
-        // Change "another-page.html" to the URL of the page you want to navigate to
-        window.location.href = "CTF_ANT.html";
+
+    function goToStage(stage) {
+        // Check if the previous stage is completed
+        if (isPreviousStageCompleted(stage)) {
+            window.location.href = stage + ".html";
+        } else {
+            alert("You must complete the previous stage first.");
+        }
+    }
+
+    function isPreviousStageCompleted(stage) {
+        const previousStage = stage.substring(0, stage.length - 1) + (parseInt(stage.charAt(stage.length - 1)) - 1);
+        const prevStageStatus = localStorage.getItem(previousStage);
+        console.log("Previous stage status: ", previousStage, prevStageStatus);
+        return prevStageStatus === "true";
     }
 
     window.onload = function() {
-    var codeForDelay = "01101011111010110";
-    var textToPrint = "11101011111101011"; 
-    var container = document.getElementById('container');
-    var index = 0;
+        var codeForDelay = "01101011111010110";
+        var textToPrint = "11101011111101011"; 
+        var container = document.getElementById('container');
+        var index = 0;
 
-    function printCharacter() {
-        if (index < textToPrint.length) {
-            // Delay for each bit
-            var delay = codeForDelay[index] === "0" ? 500 : 1500; 
-            container.innerHTML += textToPrint[index];
-            index++;
-            setTimeout(printCharacter, delay);
-        } else {
-            setTimeout(function() {
-                index = 0;
-                container.innerHTML = ''; 
-                setTimeout(printCharacter, 5000); // restart after 5 seconds
-            }, 5000); // Characters stay for 5 seconds
-        }
+        function printCharacter() {
+            if (index < textToPrint.length) {
+                // Delay for each bit
+                var delay = codeForDelay[index] === "0" ? 500 : 1500; 
+                container.innerHTML += textToPrint[index];
+                index++;
+                setTimeout(printCharacter, delay);
+            } else {
+                setTimeout(function() {
+                    index = 0;
+                    container.innerHTML = ''; 
+                    setTimeout(printCharacter, 5000); // restart after 5 seconds
+                }, 5000); // Characters stay for 5 seconds
+            }
         }
 
         printCharacter();
     }
 
-    var inputValid=false
+    var inputValid = false;
     function checkInput() {
         var expectedValue = "10000000000000001"; 
         var inputElement = document.getElementById("exampleFormControlInput1");
@@ -48,8 +61,10 @@
         console.log("Input value: ", inputValue); 
 
         if (inputValue === expectedValue) {
-            alert("Congrats you got it! Lets go to stage 2b");
+            alert("Congrats you got it! Let's go to Stage 2b");
             inputValid = true; // Set the validation result to true
+            localStorage.setItem("Stage2", "true");
+
         } else {
             inputValid = false; // Set the validation result to false
         }
@@ -58,7 +73,7 @@
     function handleButtonClick(){
         checkInput();
         if (inputValid){
-            goToStage2b();
+            goToStage('Stage3');
         }
         else{
             alert("Wrong answer! Try again!")

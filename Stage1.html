@@ -6,38 +6,48 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    function goToStage2() {
-        window.location.href = "Stage2.html";
-    }
-    function goToHome() {
-        window.location.href = "CTF_ANT.html";
-    }
     var inputValid=false
     function checkInput() {
-        var expectedValue = "ynxlzbpdvehef"; 
+        var expectedValue = "ynxlzbpdvehef";
         var inputElement = document.getElementById("exampleFormControlInput1");
         var inputValue = inputElement.value;
-        console.log("Input value: ", inputValue); 
+        console.log("Input value: ", inputValue);
 
         if (inputValue === expectedValue) {
             alert("Congrats you got it! Lets go to stage 2");
-            inputValid = true; 
+            localStorage.setItem("Stage1", "true");
+            inputValid = true;
         } else {
-            alert("Invalid input. Try again.");
-            inputValid = false; 
-            
+            inputValid = false;
         }
+    }
+
+    function goToStage(stage) {
+        // Check if the previous stage is completed
+        if (isPreviousStageCompleted(stage)) {
+            window.location.href = stage + ".html";
+        } else {
+            alert("You must complete the previous stage first.");
+        }
+    }
+
+    function isPreviousStageCompleted(stage) {
+        const previousStage = stage.substring(0, stage.length - 1) + (parseInt(stage.charAt(stage.length - 1)) - 1);
+        const prevStageStatus = localStorage.getItem(previousStage);
+        console.log("Previous stage status: ", prevStageStatus);
+        return prevStageStatus === "true";
     }
 
     function handleButtonClick(){
         checkInput();
         if (inputValid){
-            goToStage2();
+            goToStage('Stage2');
         }
         else{
             alert("Wrong answer! Try again!")
         }
     }
+
 </script>
 
 </head>
