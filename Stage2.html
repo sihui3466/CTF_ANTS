@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<head>
+<title>CTF ANTS Challenge </title>
+<script>
+    function goToStage2() {
+        // Change "another-page.html" to the URL of the page you want to navigate to
+        window.location.href = "Stage2.html";
+    }
+    function goToHome() {
+        // Change "another-page.html" to the URL of the page you want to navigate to
+        window.location.href = "CTF_ANT.html";
+    }
+
+    window.onload = function() {
+    var textToPrint = "11101011111101011"; 
+    var container = document.getElementById('container');
+    var index = 0;
+
+    function printCharacter() {
+        if (index < textToPrint.length) {
+            // Delay for each bit
+            var delay = textToPrint[index] === "0" ? 500 : 1500; 
+            container.innerHTML += textToPrint[index];
+            index++;
+            setTimeout(printCharacter, delay);
+        } else {
+            setTimeout(function() {
+                index = 0;
+                container.innerHTML = ''; 
+                setTimeout(printCharacter, 2000); // restart after 2 seconds
+            }, 5000); // Characters stay for 5 seconds
+        }
+        }
+
+        printCharacter();
+    }
+
+    var inputValid=false
+    function checkInput() {
+        var expectedValue = "ynxlzbpdvehef"; 
+        var inputElement = document.getElementById("exampleFormControlInput1");
+        var inputValue = inputElement.value;
+        console.log("Input value: ", inputValue); 
+
+        if (inputValue === expectedValue) {
+            alert("Congrats you got it! Lets go to stage 2");
+            inputValid = true; // Set the validation result to true
+        } else {
+            inputValid = false; // Set the validation result to false
+        }
+    }
+
+    function handleButtonClick(){
+        checkInput();
+        if (inputValid){
+            goToStage2();
+        }
+        else{
+            alert("Wrong answer! Try again!")
+        }
+    }
+</script>
+
+</head>
+<body>
+
+<h1>CTF ANTS Challenge</h1>
+<p></p>
+<h3>Stage 2:</h3>
+<p>All teams will have to play as different ant colonies on a mission to retrieve treasured treats from the top tier of the cake plate as tasked by the queen ant. Each step of the journey up the cake plate is part of the challenge, once the contents of the file 
+of the top tier (stage 3) has been revealed, the ant colonies will reach their goal of retrieving the treats for their queen.</p>
+
+<div id="container" style="text-align: center; font-size:60px;"></div>
+<form>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Decrypted Text</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="abcd1234">
+    </div>
+</form>
+
+
+
+<button type="button" onclick="handleButtonClick()" class="btn btn-primary">Next</button>
+<button type="button" onclick="goToHome()" class="btn btn-light">Back</button>
+
+</body>
+</html>
