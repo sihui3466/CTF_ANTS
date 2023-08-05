@@ -6,14 +6,13 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    const currentStage = 'Stage3'; // Replace 'X' with the stage number of this page
+    const currentStage = 'Stage3'; 
     if (!isPreviousStageCompleted(currentStage)) {
         alert("You must complete the previous stage first.");
-        window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
+        window.location.href = "CTF_ANT.html"; 
     }
 
     function goToStage(stage) {
-        // Check if the previous stage is completed
         if (isPreviousStageCompleted(stage)) {
             window.location.href = stage + ".html";
         } else {
@@ -22,13 +21,12 @@
     }
 
     function isPreviousStageCompleted(stage) {
-        const previousStage = "Stage2b";
+        const previousStage = "Stage2";
         const prevStageStatus = localStorage.getItem(previousStage);
         console.log("Previous stage status: ", previousStage, prevStageStatus);
         return prevStageStatus === "true";
     }
 
-    var inputValid = false;
     async function hashInput(input) {
         const encoder = new TextEncoder();
         const data = encoder.encode(input);
@@ -37,17 +35,18 @@
         const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
         return hashHex;
     }
+    
     async function handleButtonClick(){ 
-        var expectedValue = "4efc1c69491f2654dd60c2c77153e44e1dc5826f703ea236238f739edb05135c";  
+        var expectedValue = "4e414a144877af530b496bd13463d176c9d9b48e15f0895a2a4090c3c25db24b";  
         var inputElement = document.getElementById("exampleFormControlInput1"); 
         var inputValue = inputElement.value; 
         console.log("Input value: ", inputValue); 
         var hash = await hashInput(inputValue); 
         console.log("Hash value: ", hash); 
         if (hash === expectedValue) { 
-            alert("Congrats you got it! You found the flag"); 
+            alert("Congrats you got it! Let's go to stage 4"); 
             localStorage.setItem("Stage3", "true"); 
-            goToStage('flag'); 
+            goToStage('Stage4'); 
         } else { 
             alert("Wrong answer! Try again!"); 
         } 
@@ -72,15 +71,27 @@
 
 <h1>CTF ANTS Challenge</h1>
 <p></p>
-<h3>Stage 4: Almost there</h3>
+<h3>Stage 3: The queen loves rotten sweet apricots</h3>
 
-<p>Now use the values from Stage 1 and Stage 3 to decrypt the number found in at the end of Stage 1</p>
-<p>Hint: use square multiply</p>
-
+<div class="message">
+    <p>In the bowl of Rotten Sweet Apricots,</p>
+    <p>A cryptic challenge awaits, a puzzle of secret thoughts.</p>
+    <p>A key lies open, a number vast and grand,</p>
+    <p>Two primes concealed, in a digital land.</p>
+    <p>Brute force is needed, a task for the bold,</p>
+    <p>Factor the key, let the mystery unfold.</p>
+    <p>With factors in hand, a new path you'll see,</p>
+    <p>A calculation awaits, to set the secret free.</p>
+    <p>The 'd' is the door, the private's embrace,</p>
+    <p>Unlock the puzzle, and win the cryptic race.</p>
+    <p>Time is your foe, the challenge is great,</p>
+    <p>Find the public, break the private, before it's too late.</p>
+</div>
+<p>Reminder: you may need values from previous stages</p>
 <form>
     <div class="form-group">
-        <label for="exampleFormControlInput1">Value:</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="enter your number here">
+        <label for="exampleFormControlInput1">d-Value:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="enter your integer here here">
     </div>
 </form>
 

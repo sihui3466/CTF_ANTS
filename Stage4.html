@@ -6,13 +6,14 @@
 <head>
 <title>CTF ANTS Challenge </title>
 <script>
-    const currentStage = 'Stage2b'; 
+    const currentStage = 'Stage4'; // Replace 'X' with the stage number of this page
     if (!isPreviousStageCompleted(currentStage)) {
         alert("You must complete the previous stage first.");
-        window.location.href = "CTF_ANT.html"; 
+        window.location.href = "CTF_ANT.html"; // Redirect to the homepage or any other desired page
     }
 
     function goToStage(stage) {
+        // Check if the previous stage is completed
         if (isPreviousStageCompleted(stage)) {
             window.location.href = stage + ".html";
         } else {
@@ -21,12 +22,13 @@
     }
 
     function isPreviousStageCompleted(stage) {
-        const previousStage = "Stage2";
+        const previousStage = "Stage3";
         const prevStageStatus = localStorage.getItem(previousStage);
         console.log("Previous stage status: ", previousStage, prevStageStatus);
         return prevStageStatus === "true";
     }
 
+    var inputValid = false;
     async function hashInput(input) {
         const encoder = new TextEncoder();
         const data = encoder.encode(input);
@@ -35,18 +37,17 @@
         const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
         return hashHex;
     }
-    
     async function handleButtonClick(){ 
-        var expectedValue = "4e414a144877af530b496bd13463d176c9d9b48e15f0895a2a4090c3c25db24b";  
+        var expectedValue = "4efc1c69491f2654dd60c2c77153e44e1dc5826f703ea236238f739edb05135c";  
         var inputElement = document.getElementById("exampleFormControlInput1"); 
         var inputValue = inputElement.value; 
         console.log("Input value: ", inputValue); 
         var hash = await hashInput(inputValue); 
         console.log("Hash value: ", hash); 
         if (hash === expectedValue) { 
-            alert("Congrats you got it! Let's go to stage 3"); 
-            localStorage.setItem("Stage2b", "true"); 
-            goToStage('Stage3'); 
+            alert("Congrats you got it! You found the flag"); 
+            localStorage.setItem("Stage3", "true"); 
+            goToStage('flag'); 
         } else { 
             alert("Wrong answer! Try again!"); 
         } 
@@ -70,29 +71,21 @@
 <body>
 
 <h1>CTF ANTS Challenge</h1>
-<p></p>
-<h3>Stage 3: The queen loves rotten sweet apricots</h3>
-
+<h3>Stage 4: Almost there</h3>
 <div class="message">
-    <p>In the bowl of Rotten Sweet Apricots,</p>
-    <p>A cryptic challenge awaits, a puzzle of secret thoughts.</p>
-    <p>A key lies open, a number vast and grand,</p>
-    <p>Two primes concealed, in a digital land.</p>
-    <p>Brute force is needed, a task for the bold,</p>
-    <p>Factor the key, let the mystery unfold.</p>
-    <p>With factors in hand, a new path you'll see,</p>
-    <p>A calculation awaits, to set the secret free.</p>
-    <p>The 'd' is the door, the private's embrace,</p>
-    <p>Unlock the puzzle, and win the cryptic race.</p>
-    <p>Time is your foe, the challenge is great,</p>
-    <p>Find the public, break the private, before it's too late.</p>
+<p>Ants, you've journeyed far and wide, braved the treacherous terrain. </p>
+<p>The secret lies in the journey you've made. </p>
+<p>The keys to the treasure are the fruits of your labor from your past challenges.</p>
+<p>A wise old ant once told you about a method, </p>
+<p>a way to unlock secrets hidden in numbers. </p>
+<p>He called it 'square multiply'. </p>
+<p>Could this be the key to the treasure? </p>
+<p>Good luck, brave ants! </p>
 </div>
-<h5>WRITINGSONTHEWALL</h5>
-<p>al84ndi5h8qmn4a8ohfi6e874hnm4hnm4hnmlm4jo5fc6e8shwyx2y2w1v133yuvvux31jo5fc6e8s4hnm4hnm4hnmmn4lni948me8sni58786i7875slm4vuw30xuyx310xxuz01u08h7</p>
 <form>
     <div class="form-group">
-        <label for="exampleFormControlInput1">d-Value:</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="enter your integer here here">
+        <label for="exampleFormControlInput1">Final value:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="enter your number here">
     </div>
 </form>
 

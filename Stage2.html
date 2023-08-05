@@ -71,9 +71,9 @@
         var hash = await hashInput(inputValue); 
         console.log("Hash value: ", hash); 
         if (hash === expectedValue) { 
-            alert("Congrats you got it! Let's go to stage 2b"); 
+            alert("Congrats you got it! Let's go to stage 3"); 
             localStorage.setItem("Stage2", "true"); 
-            goToStage('Stage2b'); 
+            goToStage('Stage3'); 
         } else { 
             alert("Wrong answer! Try again!"); 
         } 
