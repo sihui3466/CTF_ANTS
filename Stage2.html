@@ -29,20 +29,23 @@
 
     window.onload = function() {
         var codeForDelay = "01101011111010110";
-        var textToPrint = "11101011111101011"; 
+        var textToPrint =  "11101011111010111"; 
         var container = document.getElementById('container');
         var index = 0;
+        container.innerHTML += "code:";
 
         function printCharacter() {
             if (index < textToPrint.length) {
                 var delay = codeForDelay[index] === "0" ? 500 : 2000; 
-                container.innerHTML += textToPrint[index];
-                index++;
-                setTimeout(printCharacter, delay);
+                setTimeout(function() {
+                    container.innerHTML += textToPrint[index];
+                    index++;
+                    printCharacter();
+                }, delay);
             } else {
                 setTimeout(function() {
                     index = 0;
-                    container.innerHTML = ''; 
+                    container.innerHTML = 'code:'; 
                     setTimeout(printCharacter, 2000); // restart after 2 seconds
                 }, 5000); // Characters stay for 5 seconds
             }
@@ -97,29 +100,25 @@
 <p></p>
 <h3>Stage 2: Timing attack</h3>
 <div class="message">
-    <p>In the realm where shadows dance,</p>
-    <p>A hidden path, a fleeting glance.</p>
-    <p>Two keys await, one seen, one veiled,</p>
-    <p>A twisted trail, oft sought and failed.</p>
-    <p>The first lies open, a riddle's start,</p>
-    <p>A gateway's promise, a seeker's art.</p>
-    <p>The second's hidden, a fortress strong,</p>
-    <p>A secret whispered in cipher's song.</p>
-    <p>Forge the path with wisdom's might,</p>
-    <p>Through endless maze and digital night.</p>
-    <p>Time's a foe, and clues are few,</p>
-    <p>Crack the code, and truth pursue.</p>
-    <p>In numbers, patterns, lies the way,</p>
-    <p>A fleeting game, a puzzle's play.</p>
-    <p>Seek the keys, unlock the lore,</p>
-    <p>Find what's hidden behind the door.</p>
+    <p>In the realm of ones and zeros,</p>
+    <p>A dance begins, no heroes, no heroes.</p>
+    <p>A key and text, both binary and sly,</p>
+    <p>Entwine and twist, under the coder's eye.</p>
+    <p>The dance is slow, a rhythm unique,</p>
+    <p>Half a beat for zero, one's time is oblique.</p>
+    <p>A secret's revealed, bit by bit,</p>
+    <p>Through XOR's magic, the cipher's wit.</p>
+    <p>Seek the pattern, watch the dance,</p>
+    <p>Unlock the rhythm, give truth a chance.</p>
+    <p>The key's the guide, the path's encrypted,</p>
+    <p>Find the way, lest you be restricted.</p>
 </div>
 
 <div id="container" style="text-align: center; font-size:60px;"></div>
 <form>
     <div class="form-group">
-        <label for="exampleFormControlInput1">Value:</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="enter your numbers here">
+        <label for="exampleFormControlInput1">Message:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="type your answer in binary here">
     </div>
 </form>
 
